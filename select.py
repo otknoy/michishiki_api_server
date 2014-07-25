@@ -12,18 +12,25 @@ def select():
     con = sqlite3.connect(DB_PATH, isolation_level=None)
     cur = con.cursor()
     cur.execute(sql)
-    result = [row for row in cur]
+    results = [row for row in cur]
     con.close()
-    return result
+    return results
 
 def format_result(result):
-    keys = ['id', 'latitude', 'longitude', 'title', 'comment', 'posted_by', 'created_at']
+    d = {}
+    d['id']         = result[0]
+    d['latitude']   = result[1]
+    d['longitude']  = result[2]
+    d['title']      = result[3]
+    d['comment']    = result[4]
+    d['posted_by']  = result[5]
+    d['created_at'] = result[6]
+    return d
+
+def results2dict(results):
     data = []
-    for r in result:
-        d = {}
-        for k, v in zip(keys, r):
-            d[k] = v
-        data.append(d)
+    for r in results:
+        data.append(format_result(r))
     return data
     
 def cgi_header():
@@ -31,9 +38,11 @@ def cgi_header():
     print
     
 if __name__ == '__main__':
-    result = select()
-    data = format_result(result)
+    results = select()
+    data = results2dict(results)
+
+    print data
 
     cgi_header()
     import json
-    print(json.dumps(data, indent=True, sort_keys=True))
+    print json.dumps(data, indent=True, sort_keys=True)
