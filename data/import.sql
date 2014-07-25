@@ -1,10 +1,9 @@
-create table michishiki (
+create table posts (
   id integer primary key autoincrement,
   latitude real,
   longitude real,
   posted_by text,
   title text,
-  comments text,
-  created_at integer,
-  updated_at integer
+  comment text,
+  created_at integer
 );
