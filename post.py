@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 import cgi
-import cgitb; cgitb.enable(display=0, logdir='./log')
 import sqlite3
 import time
 
