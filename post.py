@@ -29,6 +29,7 @@ def post(latitude, longitude, title, comment, posted_by):
     
 def cgi_header():
     print 'Content-Type: text/html'
+    print 'Access-Control-Allow-Origin: *'
     print
     
 if __name__ == '__main__':

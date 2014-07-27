@@ -34,14 +34,13 @@ def results2dict(results):
     return data
     
 def cgi_header():
-    print 'Content-Type: text/html'
-    print
+    print 'Content-Type: application/json'
+    print 'Access-Control-Allow-Origin: *'
+    print ''
     
 if __name__ == '__main__':
     results = select()
     data = results2dict(results)
-
-    print data
 
     cgi_header()
     import json
