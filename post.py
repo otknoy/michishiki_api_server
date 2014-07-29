@@ -4,7 +4,7 @@ import cgi
 import sqlite3
 import time
 
-DB_PATH = './data/michishiki.sqlite3'
+import config
 
 
 def fs2dict(fs):
@@ -22,15 +22,10 @@ def post(latitude, longitude, title, comment, posted_by):
     created_at = int(time.time())
     sql = u'insert into posts (id, latitude, longitude, title, comment, posted_by, created_at) values (null,?,?,?,?,?,?);'
 
-    con = sqlite3.connect(DB_PATH, isolation_level=None)
+    con = sqlite3.connect(db_path, isolation_level=None)
     con.execute(sql, (latitude, longitude, title, comment, posted_by, created_at))
     con.close()
 
-    
-def cgi_header():
-    print 'Content-Type: text/html'
-    print 'Access-Control-Allow-Origin: *'
-    print
     
 if __name__ == '__main__':
     qs = fs2dict(cgi.FieldStorage())
@@ -42,5 +37,6 @@ if __name__ == '__main__':
     else:
         result = '{"message": "Invalid query string"}'
 
-    cgi_header()
+    import utils
+    utils.cgi_header()
     print result

@@ -3,13 +3,12 @@
 import cgi
 import sqlite3
 
-DB_PATH = './data/michishiki.sqlite3'
-
+import config
 
 def select():
     sql = u'select * from posts'
 
-    con = sqlite3.connect(DB_PATH, isolation_level=None)
+    con = sqlite3.connect(config.db_path, isolation_level=None)
     cur = con.cursor()
     cur.execute(sql)
     results = [row for row in cur]
@@ -33,15 +32,12 @@ def results2dict(results):
         data.append(format_result(r))
     return data
     
-def cgi_header():
-    print 'Content-Type: application/json'
-    print 'Access-Control-Allow-Origin: *'
-    print ''
-    
 if __name__ == '__main__':
     results = select()
     data = results2dict(results)
 
-    cgi_header()
+    import utils
+    utils.cgi_header()
+    
     import json
     print json.dumps(data, indent=True, sort_keys=True)
