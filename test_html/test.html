@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="description" content="test">
     <title>sample page</title>
+
+    <script>
+      function getRandomInt(min, max) {
+        return Math.floor( Math.random() * (max - min + 1) ) + min;
+      }
+   </script>
   </head>
   <body>
     <h1>post sample</h1>
@@ -11,10 +17,15 @@
       <p>名前: <input type="text" name="posted_by" value="名無し"></p>
       <p>タイトル: <input type="text" name="title" value="sample title"></p>
       <p>コメント: <input type="text" name="comment" value="sample コメント"></p>
-      <p>緯度: <input type="number" name="latitude" step="any" value="135.494632"></p>
-      <p>経度: <input type="number" name="longitude" step="any" value="34.706768"></p>
+      <p>緯度: <input type="number" name="latitude" step="any"></p>
+      <p>経度: <input type="number" name="longitude" step="any"></p>
       <input type="submit">
     </form>
+
+    <script>
+    document.forms[0].latitude.value = getRandomInt(-180, 180);
+    document.forms[0].longitude.value = getRandomInt(-180, 180);
+    </script>
     
     <h1>select sample</h1>
     <form action="../select.py" method="post" >
