@@ -8,36 +8,24 @@ import config
 def select():
     sql = u'select * from posts'
 
-    con = sqlite3.connect(config.db_path, isolation_level=None)
-    cur = con.cursor()
+    conn = sqlite3.connect(config.db_path, isolation_level=None)
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
     cur.execute(sql)
-    results = [row for row in cur]
-    con.close()
+    results = rows2dict(cur.fetchall())
+    conn.close()
     return results
 
-def format_result(result):
-    d = {}
-    d['id']         = result[0]
-    d['latitude']   = result[1]
-    d['longitude']  = result[2]
-    d['title']      = result[3]
-    d['comment']    = result[4]
-    d['posted_by']  = result[5]
-    d['created_at'] = result[6]
-    return d
+def rows2dict(rows):
+    '''list of sqlite3.Row to dict'''
+    return [dict(zip(r.keys(), r)) for r in rows]
 
-def results2dict(results):
-    data = []
-    for r in results:
-        data.append(format_result(r))
-    return data
-    
+
 if __name__ == '__main__':
-    results = select()
-    data = results2dict(results)
+    result = select()
 
     import utils
     utils.cgi_header()
     
     import json
-    print json.dumps(data, indent=True, sort_keys=True)
+    print json.dumps(result, indent=True, sort_keys=True)
