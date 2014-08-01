@@ -3,6 +3,7 @@ create table posts (
   title text,
   comment text,
   posted_by text,
+  localite integer,
   rate integer,
   latitude real,
   longitude real,
