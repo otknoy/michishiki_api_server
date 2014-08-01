@@ -1,9 +1,11 @@
 create table posts (
   id integer primary key autoincrement,
-  latitude real,
-  longitude real,
   title text,
   comment text,
   posted_by text,
-  created_at integer
+  rate integer,
+  latitude real,
+  longitude real,
+  created_at integer,
+  updated_at integer
 );
