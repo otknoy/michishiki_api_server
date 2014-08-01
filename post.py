@@ -15,15 +15,18 @@ def fs2dict(fs):
     return params
 
 def valid(qs):
-    required_keys = ['latitude', 'longitude', 'title', 'comment', 'posted_by']
+    required_keys = ['title', 'comment', 'posted_by', 'latitude', 'longitude']
     return all([qs.has_key(k) for k in required_keys])
 
-def post(latitude, longitude, title, comment, posted_by):
+def post(title, comment, posted_by, latitude, longitude):
+    rate = 0
     created_at = int(time.time())
-    sql = u'insert into posts (id, latitude, longitude, title, comment, posted_by, created_at) values (null,?,?,?,?,?,?);'
+    updated_at = created_at
 
-    con = sqlite3.connect(db_path, isolation_level=None)
-    con.execute(sql, (latitude, longitude, title, comment, posted_by, created_at))
+    sql = u'insert into posts (id, title, comment, posted_by, rate, latitude, longitude, created_at, updated_at) values (null,?,?,?,?,?,?,?,?);'
+
+    con = sqlite3.connect(config.db_path, isolation_level=None)
+    con.execute(sql, (title, comment, posted_by, rate, latitude, longitude, created_at, updated_at))
     con.close()
 
     
