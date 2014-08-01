@@ -33,8 +33,9 @@ def post(title, comment, posted_by, latitude, longitude):
 if __name__ == '__main__':
     qs = fs2dict(cgi.FieldStorage())
 
+    keys = ['title', 'comment', 'posted_by', 'latitude', 'longitude']
     if valid(qs):
-        query_string = [qs[k].decode('utf-8') for k in ['latitude', 'longitude', 'title', 'comment', 'posted_by']]
+        query_string = [qs[k].decode('utf-8') for k in keys]
         post(*query_string)
         result = '{"message": "Successfully posted!"}'
     else:
