@@ -7,7 +7,6 @@ import config
 
 def select():
     sql = u'select * from posts'
-
     conn = sqlite3.connect(config.db_path, isolation_level=None)
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
