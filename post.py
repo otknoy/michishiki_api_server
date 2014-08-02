@@ -6,14 +6,6 @@ import time
 
 import config
 
-
-def fs2dict(fs):
-    '''Field strage to dict'''
-    params = {}
-    for k in fs.keys():
-        params[k] = fs[k].value
-    return params
-
 def valid(qs):
     required_keys = ['title', 'comment', 'posted_by', 'localite', 'latitude', 'longitude']
     return all([qs.has_key(k) for k in required_keys])
@@ -31,7 +23,9 @@ def post(title, comment, posted_by, localite, latitude, longitude):
 
     
 if __name__ == '__main__':
-    qs = fs2dict(cgi.FieldStorage())
+    import utils
+
+    qs = utils.fs2dict(cgi.FieldStorage())
 
     if valid(qs):
         keys = ['title', 'comment', 'posted_by', 'localite', 'latitude', 'longitude']
@@ -41,6 +35,5 @@ if __name__ == '__main__':
     else:
         result = '{"message": "Invalid query string"}'
 
-    import utils
     utils.cgi_header()
     print result
