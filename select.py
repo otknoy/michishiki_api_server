@@ -44,16 +44,28 @@ class SQLBuilder:
         return sql
 
 if __name__ == '__main__':
+    import utils
+
+    qs = utils.fs2dict(cgi.FieldStorage())
     builder = SQLBuilder()
-    builder.set_range_condition(0, 0, 90, 150.2)
-    builder.set_order(order_by='created_at', ascend=False)
-    builder.set_limit(limit=1)
+
+    # filter by range
+    keys = ['lat1', 'lng1', 'lat2', 'lng2']
+    if all([qs.has_key(k) for k in keys]):
+        builder.set_range_condition(*[float(qs[k]) for k in keys])
+
+    # order by
+    if qs.has_key('order_by'):
+        builder.set_order(order_by=qs['order_by'], ascend=False)
+
+    # limit
+    if qs.has_key('limit'):
+        builder.set_limit(int(qs['limit']))
+
     sql = builder.build()
-    print sql
 
     result = select(sql)
 
-    import utils
     utils.cgi_header()
     
     import json
