@@ -11,6 +11,17 @@ michishiki_api_server
  * `chmod 777 data/; chmod 777 data/michishiki.sqlite3`
 
 # API reference
+ 
+## post.py
 
-* post.py
-* select.py
+* required keys
+ * posted_by
+ * title
+ * comment
+ * localite
+ * latitude
+ * longitude
+ 
+## select.py
+ * sample query
+  * http://localhost/michishiki_api_server/select.py?lat1=0&lng1=0&lat2=90&lng2=180&order_by=latitude&limit=3
