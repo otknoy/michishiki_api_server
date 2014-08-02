@@ -30,8 +30,8 @@ class SQLBuilder:
         lng_condition = '%f < longitude and longitude < %f' % (lng1, lng2)
         self.condition = u'where %s and %s' % (lat_condition, lng_condition)
 
-    def set_order(self, order_by, ascend=True):
-        self.order = u'order by %s %s' % (order_by, ('asc' if ascend  else 'desc'))
+    def set_order(self, order_by, order='ascend'):
+        self.order = u'order by %s %s' % (order_by, {'ascend': 'asc', 'descend': 'desc'}[order])
 
     def set_limit(self, limit):
         self.limit = u'limit %d' % limit
@@ -56,7 +56,8 @@ if __name__ == '__main__':
 
     # order by
     if qs.has_key('order_by'):
-        builder.set_order(order_by=qs['order_by'], ascend=False)
+        order = qs['order'] if qs.has_key('order') else 'ascend'
+        builder.set_order(order_by=qs['order_by'], order=order)
 
     # limit
     if qs.has_key('limit'):
@@ -67,6 +68,7 @@ if __name__ == '__main__':
     result = select(sql)
 
     utils.cgi_header()
-    
+    print sql
+    exit()
     import json
     print json.dumps(result, indent=True, sort_keys=True)
