@@ -68,7 +68,6 @@ if __name__ == '__main__':
     result = select(sql)
 
     utils.cgi_header()
-    print sql
-    exit()
+
     import json
     print json.dumps(result, indent=True, sort_keys=True)
