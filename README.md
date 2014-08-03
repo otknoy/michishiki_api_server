@@ -21,7 +21,17 @@ michishiki_api_server
  * localite
  * latitude
  * longitude
- 
+
+
 ## select.py
- * sample query
-  * http://localhost/michishiki_api_server/select.py?lat1=0&lng1=0&lat2=90&lng2=180&order_by=latitude&limit=3
+
+* Filter by map range
+ * lat1, lng1: northwest end point latitude and longitude on a map
+ * lat2, lng2: southeast end point latitude and longitude on a map
+* Order by *
+ * order_by: specify row name
+ * order: *ascend* or *descend*
+* Limitation
+ * limit: number of returned items
+* sample query
+ * http://localhost/michishiki_api_server/select.py?lat1=0&lng1=0&lat2=90&lng2=180&order_by=latitude&order=ascend&limit=3
