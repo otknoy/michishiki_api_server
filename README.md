@@ -26,8 +26,8 @@ michishiki_api_server
 ## select.py
 
 * Filter by map range
- * lat1, lng1: northwest end point latitude and longitude on a map
- * lat2, lng2: southeast end point latitude and longitude on a map
+ * lat1, lng1: southwest end point latitude and longitude on a map
+ * lat2, lng2: northeast end point latitude and longitude on a map
 * Order by *
  * order_by: specify row name
  * order: *ascend* or *descend*
