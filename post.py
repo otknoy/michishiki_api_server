@@ -12,7 +12,7 @@ def valid(qs):
 
 def post(title, comment, posted_by, localite, latitude, longitude):
     rate = 0
-    created_at = int(time.time())
+    created_at = int(time.time()*1000)
     updated_at = created_at
 
     sql = u'insert into posts (id, title, comment, posted_by, localite, rate, latitude, longitude, created_at, updated_at) values (null,?,?,?,?,?,?,?,?,?);'
