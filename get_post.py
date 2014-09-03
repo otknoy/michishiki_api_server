@@ -33,7 +33,7 @@ class SQLBuilder:
         if lng1 < lng2:
             lng_condition = '%f < longitude and longitude < %f' % (lng1, lng2)
         else:
-            lng_condition = '(%f < longitude and longitude < 90) or (-90 < longitude and longitude < %f)' % (lng1, lng2)
+            lng_condition = '(%f < longitude and longitude < 180) or (-180 < longitude and longitude < %f)' % (lng1, lng2)
         self.condition = u'where %s and %s' % (lat_condition, lng_condition)
 
     def set_order(self, order_by, order='ascend'):
