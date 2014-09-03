@@ -26,8 +26,14 @@ class SQLBuilder:
         self.limit = -1
 
     def set_range_condition(self, lat1, lng1, lat2, lng2):
-        lat_condition = '%f < latitude and latitude < %f' % (lat1, lat2)
-        lng_condition = '%f < longitude and longitude < %f' % (lng1, lng2)
+        if lat1 < lng2:
+            lat_condition = '%f < latitude and latitude < %f' % (lat1, lat2)
+        else:
+            lat_condition = '(%f < latitude and latitude < 90) or (-90 < latitude and latitude < %f)' % (lat1, lat2)
+        if lng1 < lng2:
+            lng_condition = '%f < longitude and longitude < %f' % (lng1, lng2)
+        else:
+            lng_condition = '(%f < longitude and longitude < 180) or (-180 < longitude and longitude < %f)' % (lng1, lng2)
         self.condition = u'where %s and %s' % (lat_condition, lng_condition)
 
     def set_order(self, order_by, order='ascend'):
