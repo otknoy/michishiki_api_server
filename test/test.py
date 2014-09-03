@@ -14,16 +14,11 @@ if __name__ == '__main__':
     from get_post import select
 
     b = SQLBuilder()
-    b.set_range_condition(-90, -180, 90, 180)
+    b.set_range_condition(-74, -18, 52, -61)
     print b.build()
-    print select(b.build())
+    print len(select(b.build()))
 
     b = SQLBuilder()
-    b.set_range_condition(90, 180, -90, -180)
+    b.set_range_condition(-74, -33, 52, -75)
     print b.build()
-    print select(b.build())
-
-    b = SQLBuilder()
-    b.set_range_condition(45, 90, -45, -90)
-    print b.build()
-    print select(b.build())
+    print len(select(b.build()))
