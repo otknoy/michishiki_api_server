@@ -30,7 +30,7 @@ class SQLBuilder:
             lat_condition = '%f < latitude and latitude < %f' % (lat1, lat2)
         else:
             lat_condition = '(%f < latitude and latitude < 90) or (-90 < latitude and latitude < %f)' % (lat1, lat2)
-        if lng1 < lng1:
+        if lng1 < lng2:
             lng_condition = '%f < longitude and longitude < %f' % (lng1, lng2)
         else:
             lng_condition = '(%f < longitude and longitude < 90) or (-90 < longitude and longitude < %f)' % (lng1, lng2)
