@@ -23,7 +23,7 @@ michishiki_api_server
  * longitude
 
 
-## select.py
+## get_post.py
 
 * Filter by map range
  * lat1, lng1: southwest end point latitude and longitude on a map
